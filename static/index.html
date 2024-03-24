@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Social</title>
+  </head>
+  <body>
+    <!-- <div class="header-container">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li class="nav-item me-3 me-lg-0">
+              <div class="dropdown">
+                <a
+                  class="me-3 dropdown-toggle hidden-arrow"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-bell text-white"></i>
+                  <span class="badge rounded-pill badge-notification bg-danger"
+                    >1</span
+                  >
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <li>
+                    <a class="dropdown-item" href="#">Some news</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Another news</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search"
+                name="search"
+              />
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div> -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" />
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+              >Notifications (1) <span class="caret"></span
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Page 1-1</a></li>
+              <li><a href="#">Page 1-2</a></li>
+              <li><a href="#">Page 1-3</a></li>
+            </ul>
+          </li>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#"
+                ><span class="glyphicon glyphicon-user"></span>Ahsan Rehman</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="glyphicon glyphicon-log-out"></span> Logout</a
+              >
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="sidebar">
+        <h3>Following:</h3>
+        <ul>
+          <li>Kyoraku Shunsui</li>
+          <li>Kenpachi Zaraki</li>
+          <li>Fern</li>
+          <li>Denken</li>
+          <li>Urahara Kisuke</li>
+          <li>Gojo Satoru</li>
+        </ul>
+        <h3>Followers:</h3>
+        <ul>
+          <li>Kyoraku Shunsui</li>
+          <li>Kenpachi Zaraki</li>
+          <li>Fern</li>
+          <li>Denken</li>
+          <li>Urahara Kisuke</li>
+          <li>Gojo Satoru</li>
+        </ul>
+
+        <h3>People You may Know</h3>
+        <div class="people-you-may-know">
+          <div class="single-person">
+            <h5>Byakuya</h5>
+            <img
+              src="images/kokushibo.jpg"
+              class="single-person-image"
+              alt=""
+            />
+            <button class="myButton">Follow</button>
+          </div>
+          <div class="single-person">
+            <h5>Unohana</h5>
+            <img src="images/unohana.jpg" class="single-person-image" alt="" />
+            <button class="myButton">Follow</button>
+          </div>
+          <div class="single-person">
+            <h5>Yoroichi</h5>
+            <img src="images/326271.png" class="single-person-image" alt="" />
+            <button class="myButton">Follow</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mainfeed">
+        <div class="post-form">
+          <form action="">
+            <textarea
+              name="thinking"
+              id="thinking"
+              cols="30"
+              rows="10"
+              class="thinking"
+              placeholder="What are you thinking about?"
+            ></textarea>
+            <button type="submit" class="myButton">Post</button>
+          </form>
+          <div class="posts">
+            <!-- <i class="fa fa-user" style="color: black"></i> -->
+            <div class="single-post">
+              <div class="user-image">
+                <img src="images/avatar.svg" class="post-user-image" alt="" />
+                <h5>Ahsan Rehman</h5>
+              </div>
+              <div class="date-caption">
+                <p>July 4th, 2024</p>
+                <p>Caption</p>
+              </div>
+              <img src="images/elfen.jpg" alt="" />
+              <div class="like-comment">
+                <label for="">Like</label>
+                <i class="fa fa-thumbs-up myIcons"></i>
+                <form action="">
+                  <label for="comment">Comment on this Post</label>
+                  <textarea
+                    class="comment"
+                    name="comment"
+                    id="comment"
+                    cols="30"
+                    rows="1"
+                  ></textarea>
+                  <button type="submit" class="myButton">Comment</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="single-post">
+              <div class="user-image">
+                <img src="images/avatar.svg" class="post-user-image" alt="" />
+                <h5>Ahsan Rehman</h5>
+              </div>
+              <div class="date-caption">
+                <p>July 4th, 2024</p>
+                <p>Caption</p>
+              </div>
+              <video class="post-video" controls>
+                <source src="videos/demon slayer 4.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="like-comment">
+                <label for="">Like</label>
+                <i class="fa fa-thumbs-up myIcons"></i>
+                <form action="">
+                  <label for="comment">Comment on this Post</label>
+                  <textarea
+                    class="comment"
+                    name="comment"
+                    cols="30"
+                    rows="1"
+                  ></textarea>
+                  <button type="submit" class="myButton">Comment</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="single-post">
+              <div class="user-image">
+                <img src="images/avatar.svg" class="post-user-image" alt="" />
+                <h5>Sosuke Aizen</h5>
+              </div>
+              <div class="date-caption">
+                <p>July 4th, 2024</p>
+                <p>Caption</p>
+              </div>
+              <img src="images/Apocalypse_1.jpg" alt="" />
+              <div class="like-comment">
+                <label for="">Like</label>
+                <i class="fa fa-thumbs-up myIcons"></i>
+                <form action="">
+                  <label for="comment">Comment on this Post</label>
+                  <textarea
+                    class="comment"
+                    name="comment"
+                    cols="30"
+                    rows="1"
+                  ></textarea>
+                  <button type="submit" class="myButton">Comment</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

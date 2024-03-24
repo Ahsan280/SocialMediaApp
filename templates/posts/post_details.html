@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .post-details-container{
+    width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    }
+</style>
+<br>
+<br>
+<br>
+<div class="post-details-container">
+<div class="single-post">
+    <div class="user-image">
+        <img
+          src="{% static 'images/avatar.svg' %}"
+          class="post-user-image"
+          alt=""
+        />
+        <h5>{{post.user.first_name}}</h5>
+      </div>
+    <div class="date-caption">
+        <p>{{post.created_at}}</p>
+        <p>{{post.caption}}</p>
+      </div>
+    {% if post.mypost.url|lower|slice:"-4:" == ".mp4" or post.mypost.url|lower|slice:"-4:" == ".mkv" %}
+    <video class="post-video" style="width:100%" controls>
+        <source src="{{post.mypost.url}}" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+    {% else %}
+    <img src="{{post.mypost.url}}" style="width:100%" alt="" />
+    {% endif %}
+    <div class="like-comment">
+        {% if post.liked %}
+        <a href="{% url 'unlike_post' post.id %}">
+            <i class="fa fa-thumbs-up myIcons" style="color: rgb(219, 117, 0);"></i>
+        </a>
+        {% else %}
+        <a href="{% url 'like_post' post.id %}">
+          <i class="fa fa-thumbs-up myIcons"></i>
+        </a>
+        {% endif %}
+        <form action="{% url 'comment' post.id %}" method="POST">
+          {% csrf_token %}
+          <label for="comment">Comment on this Post</label>
+          <textarea
+            class="comment"
+            name="comment"
+            id="comment"
+            cols="30"
+            rows="1"
+          ></textarea>
+          <button type="submit" class="myButton">Comment</button>
+        </form>
+      </div>
+      <button type="button" class="myButton" data-toggle="modal" data-target="#modal_{{post.id}}">Likes</button>
+
+<!-- Modal -->
+    <div class="modal fade" id="modal_{{post.id}}" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Liked By</h4>
+          </div>
+          <div class="modal-body">
+            {% for like in post.like_set.all %}
+              <h4>{{ like.liked_by.first_name }}</h4>
+            {% endfor %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+       <button type="button" class="myButton" data-toggle="modal" data-target="#modal_c{{post.id}}">Comments</button>
+  <!-- Modal -->
+  <div class="modal fade" id="modal_c{{post.id}}" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Comments</h4>
+          </div>
+          <div class="modal-body">
+            {% for c in post.comment_set.all|dictsort:"created_at" %}
+            <h4>{{c.commentor.first_name}}:</h4> <p>{{c.comment}}</p>
+            {% endfor %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+    <!-- Bootstrap 5 JavaScript bundle with Popper.js -->

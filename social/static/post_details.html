@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha384-Dw4zVDpYYhvZdSvzJ+LsPOhT23E7vY6PfFQUnr9Rt6Z0LyX+gAY6XbJ+ZP2tcq5B"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Post Details</title>
+  </head>
+  <body>
+    <nav></nav>
+    <div class="row mt-3">
+      <div class="col-6 offset-3 text-center">
+        <div class="card" style="width: 100%">
+          <div class="card-body">
+            <div class="single-post">
+              <div class="user-image">
+                <img src="images/avatar.svg" class="post-user-image" alt="" />
+                <h5>Sosuke Aizen</h5>
+              </div>
+              <div class="date-caption">
+                <p>July 4th, 2024</p>
+                <p>Caption</p>
+              </div>
+              <img
+                class="card-img-top"
+                src="images/Apocalypse_1.jpg"
+                alt="Card image cap"
+              />
+              <div class="like-comment">
+                <label for="">Like</label>
+                <i class="fa fa-thumbs-up myIcons"></i>
+                <form action="">
+                  <label for="comment">Comment on this Post</label>
+                  <textarea
+                    class="comment"
+                    name="comment"
+                    cols="30"
+                    rows="1"
+                  ></textarea>
+                  <button type="submit" class="myButton">Comment</button>
+                </form>
+              </div>
+              <button
+                type="button"
+                class="myButton"
+                data-toggle="modal"
+                data-target="#modal_{{post.id}}"
+              >
+                Likes
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="modal_{{post.id}}" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                      </button>
+                      <h4 class="modal-title">Liked By</h4>
+                    </div>
+                    <div class="modal-body">
+                      {% for like in post.like_set.all %}
+                      <h4>{{ like.liked_by.first_name }}</h4>
+                      {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="myButton"
+                data-toggle="modal"
+                data-target="#modal_c{{post.id}}"
+              >
+                Comments
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="modal_c{{post.id}}" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                      </button>
+                      <h4 class="modal-title">Comments</h4>
+                    </div>
+                    <div class="modal-body">
+                      {% for c in post.comment_set.all|dictsort:"created_at" %}
+                      <h4>{{c.commentor.first_name}}:</h4>
+                      <p>{{c.comment}}</p>
+                      {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle with Popper.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

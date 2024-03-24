@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .mycontainer{
+    margin-top:100px;
+    width:800px;
+    justify-content:center;
+    }
+
+    .posts{
+    margin-left:150px;
+
+    }
+    .people-you-may-know{
+    margin-left:150px;
+
+    }
+
+</style>
+<div class="mycontainer">
+<div class="people-you-may-know">
+    <h2>Users</h2>
+  {% if searched_profiles %}
+      {% for profile in searched_profiles %}
+      {% if not profile.user == request.user %}
+      <div class="single-person">
+        <a href="{% url 'user_details' profile.user.id %}" style="color:black;"><h5>{{profile.user.full_name}}</h5></a>
+        {% if profile.profile_picture %}
+        <img src="{{profile.profile_picture.url}}" class="single-person-image" alt="" />
+        {% else %}
+        <img src="{% static 'images/avatar.svg' %}" class="single-person-image" alt="" />
+        {% endif %}
+        <a href="{% url 'follow' profile.user.id %}" class="myButton">Follow</a>
+      </div>
+      {% endif %}
+      {% endfor %}
+  {% else %}
+  <br>
+  <h3 style="margin-right:200px">No Users Found</h3>
+  {% endif %}
+    </div>
+
+
+<div class="posts">
+
+        <!-- <i class="fa fa-user" style="color: black"></i> -->
+    <h2>Posts</h2>
+  {% if posts %}
+    {% for post in posts %}
+        <div class="single-post">
+          <div class="user-image">
+            <img
+              src="{% static 'images/avatar.svg' %}"
+              class="post-user-image"
+              alt=""
+            />
+            <h5>{{post.user.first_name}}</h5>
+          </div>
+          <div class="date-caption">
+            <p>{{post.created_at}}</p>
+            <p>{{post.caption}}</p>
+          </div>
+
+          {% if post.mypost.url|lower|slice:"-4:" == ".mp4" or post.mypost.url|lower|slice:"-4:" == ".mkv" %}
+          <video class="post-video" controls>
+            <source src="{{post.mypost.url}}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {% else %}
+          <img src="{{post.mypost.url}}" alt="" />
+          {% endif %}
+          <div class="like-comment">
+            {% if post.liked %}
+            <a href="{% url 'unlike_post' post.id %}">
+              <i class="fa fa-thumbs-down myIcons" style="color: rgb(219, 117, 0);"></i>
+            </a>
+            {% else %}
+            <a href="{% url 'like_post' post.id %}">
+              <i class="fa fa-thumbs-up myIcons"></i>
+            </a>
+            {% endif %}
+            <form action="{% url 'comment' post.id %}" method="POST">
+                {% csrf_token %}
+              <label for="comment">Comment on this Post</label>
+              <textarea
+                class="comment"
+                name="comment"
+                id="comment"
+                cols="30"
+                rows="1"
+              ></textarea>
+              <button type="submit" class="myButton">Comment</button>
+            </form>
+          </div>
+            <button type="button" class="myButton" data-toggle="modal" data-target="#modal_{{post.id}}">Likes</button>
+
+  <!-- Modal -->
+        <div class="modal fade" id="modal_{{post.id}}" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liked By</h4>
+              </div>
+              <div class="modal-body">
+                {% for like in post.like_set.all %}
+                  <h4>{{ like.liked_by.first_name }}</h4>
+                {% endfor %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+           <button type="button" class="myButton" data-toggle="modal" data-target="#modal_c{{post.id}}">Comments</button>
+
+  <!-- Modal -->
+          <div class="modal fade" id="modal_c{{post.id}}" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Comments</h4>
+              </div>
+              <div class="modal-body">
+                {% for c in post.comment_set.all|dictsort:"created_at" %}
+                <h4>{{c.commentor.first_name}}:</h4> <p>{{c.comment}}</p>
+                {% endfor %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+  {% else %}
+  <h3>No Posts Found</h3>
+  {% endif %}
+      </div>
+
+
+</div>
+{% endblock %}
