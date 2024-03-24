@@ -21,16 +21,10 @@ def make_post(request):
 
         caption=request.POST.get('caption')
         myfile=request.FILES.get('myfile')
-        if caption and myfile:
-            # Save the file content directly to the database
-            post = Post.objects.create(
-                caption=caption,
-                user=request.user,
-            )
-            # Assign the file content to the mypost field
-        post.mypost=myfile
+        post=Post.objects.create(caption=caption,
+                                 user=request.user,
+                                 mypost=myfile)
         post.save()
-
         for receiver in send_to_users:
             notification=Notification.objects.create(post=post,
                                                      sender=request.user,
