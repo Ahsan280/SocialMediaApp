@@ -154,5 +154,5 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='gamerunreal12345@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD='xkupfwtrmxvgugyx'  # Your email password or App Passwordv
+EMAIL_HOST_PASSWORD='myfghvdnmxslxkqn'  # Your email password or App Passwordv
 SERVER_EMAIL = 'gamerunreal12345@gmail.com'  # Set your server email
