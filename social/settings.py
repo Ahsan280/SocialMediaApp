@@ -29,9 +29,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['socialmediaapp-dev-capc.2.sg-1.fl0.io']
 
-# CSRF_TRUSTED_ORIGINS = ['https://']
+CSRF_TRUSTED_ORIGINS = ['https://socialmediaapp-dev-capc.2.sg-1.fl0.io']
 
 # Application definition
 
