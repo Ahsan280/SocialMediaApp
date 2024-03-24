@@ -23,7 +23,7 @@ def make_post(request):
         myfile=request.FILES.get('myfile')
         post=Post.objects.create(caption=caption,
                                  user=request.user,
-                                 mypost=myfile)
+                                 mypost=myfile.read())
         post.save()
         for receiver in send_to_users:
             notification=Notification.objects.create(post=post,
