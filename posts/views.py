@@ -7,7 +7,7 @@ from accounts.models import Account, UserFollowing, UserFollower, UserProfile
 from .models import Post, Like, Comment, Notification
 # Create your views here.
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def make_post(request):
     if request.method=='POST':
         following=UserFollower.objects.filter(follower=request.user)
@@ -28,7 +28,8 @@ def make_post(request):
                 user=request.user,
             )
             # Assign the file content to the mypost field
-        post.mypost.save(myfile.name, myfile)
+        post.mypost=myfile
+        post.save()
 
         for receiver in send_to_users:
             notification=Notification.objects.create(post=post,
